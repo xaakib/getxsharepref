@@ -4,13 +4,15 @@ import 'package:getxsharepref/controller/getDataIntance.dart';
 import 'package:getxsharepref/controller/getData_controller.dart';
 import 'package:getxsharepref/mainHome_dart.dart';
 
+import 'controller/imageController.dart';
 import 'directory_screen.dart';
+import 'getImage_screen.dart';
 import 'homePage.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   Get.put<GetDataController>(GetDataController(), permanent: true);
-
+  Get.put<ImageController>(ImageController(), permanent: true);
   runApp(const MyApp());
 }
 
@@ -20,6 +22,7 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
+    imageController.loginProcess == false;
     // print("ROOt" + getDataController.dataValue.toString());
     return GetMaterialApp(
       title: 'Cinebaz Storage',
@@ -30,7 +33,8 @@ class MyApp extends StatelessWidget {
       routes: {
         '/': (context) => MainHome(),
         '/homepage': (context) => HomePage(),
-        '/DirectoryScreen':(context)=> DirectoryScreen(),
+        '/DirectoryScreen': (context) => DirectoryScreen(),
+        '/GetImageScreen': (context) => GetImageScreen(),
       },
     );
   }

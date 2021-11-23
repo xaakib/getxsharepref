@@ -1,5 +1,7 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:getxsharepref/view_screenImage.dart';
 import 'package:permission_handler/permission_handler.dart';
 
 class DirectoryScreen extends StatefulWidget {
@@ -23,13 +25,10 @@ class _DirectoryScreenState extends State<DirectoryScreen> {
 
   getExitFile() async {
     print("Fun");
-    final myDir = Directory("/storage/emulated/0/");
+    final myDir = Directory("/storage/emulated/0/Snapchat/");
     var isThere = await myDir.exists();
     print(isThere ? 'exists' : 'non-existent');
     isThere ? getpath(myDir) : print("Not Exits");
-    setState(() {
-      isLoading = true;
-    });
   }
 
   getpath(path) async {
@@ -38,6 +37,7 @@ class _DirectoryScreenState extends State<DirectoryScreen> {
     await for (var entity
         in systemTempDir.list(recursive: true, followLinks: false)) {
       var pathImage = entity.path;
+      print(pathImage);
       RegExp regExp = new RegExp(
         r"\.(gif|jpe?g|tiff?|png|webp|bmp)",
         caseSensitive: false,
@@ -47,6 +47,10 @@ class _DirectoryScreenState extends State<DirectoryScreen> {
         imagesPath.add(pathImage);
       }
     }
+    setState(() {
+      isLoading = true;
+      print("Loading $isLoading");
+    });
   }
 
   void _listenForPermissionStatus() async {
@@ -66,6 +70,8 @@ class _DirectoryScreenState extends State<DirectoryScreen> {
   Widget build(BuildContext context) {
     // /storage/emulated/0/Download/images.jpeg
     print("Build ImageList :  $imagesPath");
+
+    print(imagesPath.length);
     return isLoading
         ? Scaffold(
             appBar: AppBar(
@@ -83,10 +89,18 @@ class _DirectoryScreenState extends State<DirectoryScreen> {
                         primary: false,
                         itemCount: imagesPath.length,
                         itemBuilder: (context, index) {
-                          return Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: Image(
-                                image: FileImage(File(imagesPath[index]))),
+                          return InkWell(
+                            onTap: (){
+                              Get.to(ViewImageScreen(imageFle: imagesPath[index],));
+                            },
+                            child: Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: Image(
+                                image: FileImage(File(imagesPath[index])),
+                                height: 100,
+                                width: 100,
+                              ),
+                            ),
                           );
                         }),
                   ),
@@ -94,6 +108,11 @@ class _DirectoryScreenState extends State<DirectoryScreen> {
               ),
             ),
           )
-        : Center(child: CircularProgressIndicator());
+        : Scaffold(
+            backgroundColor: Colors.black,
+            appBar: AppBar(
+              title: Text("data"),
+            ),
+            body: Center(child: CircularProgressIndicator()));
   }
 }
