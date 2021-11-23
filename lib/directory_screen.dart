@@ -69,7 +69,10 @@ class _DirectoryScreenState extends State<DirectoryScreen> {
     return isLoading
         ? Scaffold(
             appBar: AppBar(
-              title: Text("permision"),
+              centerTitle: false,
+              leadingWidth: 0,
+              leading: Container(),
+              title: Text("Gallery App"),
             ),
             body: SingleChildScrollView(
               child: Column(
