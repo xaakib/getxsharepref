@@ -4,6 +4,7 @@ import 'package:getxsharepref/controller/getDataIntance.dart';
 import 'package:getxsharepref/controller/getData_controller.dart';
 import 'package:getxsharepref/mainHome_dart.dart';
 
+import 'directory_screen.dart';
 import 'homePage.dart';
 
 void main() async {
@@ -25,10 +26,11 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      initialRoute: '/',
+      initialRoute: '/DirectoryScreen',
       routes: {
         '/': (context) => MainHome(),
         '/homepage': (context) => HomePage(),
+        '/DirectoryScreen':(context)=> DirectoryScreen(),
       },
     );
   }
