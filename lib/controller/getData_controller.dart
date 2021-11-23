@@ -36,7 +36,7 @@ class GetDataController extends GetxController {
       dataValue.value = intValue;
      
     }
-    print("GetValue  Data from Sharepref : $intValue");
+    // print("GetValue  Data from Sharepref : $intValue");
   }
 
   deleteValue() async {
