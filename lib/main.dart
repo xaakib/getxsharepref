@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:getxsharepref/controller/getDataIntance.dart';
 import 'package:getxsharepref/controller/getData_controller.dart';
 import 'package:getxsharepref/mainHome_dart.dart';
+import 'package:getxsharepref/tumblain_Screen.dart';
 
 import 'controller/imageController.dart';
 import 'directory_screen.dart';
@@ -29,13 +30,15 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      initialRoute: '/DirectoryScreen',
-      routes: {
-        '/': (context) => MainHome(),
-        '/homepage': (context) => HomePage(),
-        '/DirectoryScreen': (context) => DirectoryScreen(),
-        '/GetImageScreen': (context) => GetImageScreen(),
-      },
+      home: HomeGalery(),
+      // initialRoute: '/DirectoryScreen',
+      // routes: {
+      //   '/': (context) => MainHome(),
+      //   '/homepage': (context) => HomePage(),
+      //   '/DirectoryScreen': (context) => DirectoryScreen(),
+      //   '/GetImageScreen': (context) => GetImageScreen(),
+       
+      // },
     );
   }
 }

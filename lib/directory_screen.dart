@@ -1,7 +1,9 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:getxsharepref/view_screenImage.dart';
+import 'package:path_provider/path_provider.dart';
 import 'package:permission_handler/permission_handler.dart';
 
 class DirectoryScreen extends StatefulWidget {
@@ -25,7 +27,7 @@ class _DirectoryScreenState extends State<DirectoryScreen> {
 
   getExitFile() async {
     print("Fun");
-    final myDir = Directory("/storage/emulated/0/Snapchat/");
+    final myDir = Directory("/storage/emulated/0/");
     var isThere = await myDir.exists();
     print(isThere ? 'exists' : 'non-existent');
     isThere ? getpath(myDir) : print("Not Exits");
@@ -37,9 +39,10 @@ class _DirectoryScreenState extends State<DirectoryScreen> {
     await for (var entity
         in systemTempDir.list(recursive: true, followLinks: false)) {
       var pathImage = entity.path;
-      print(pathImage);
+
+      print(":::::::::" + pathImage);
       RegExp regExp = new RegExp(
-        r"\.(gif|jpe?g|tiff?|png|webp|bmp)",
+        r"\.(mov|avi?g|wmv?|mp4|3gp)",
         caseSensitive: false,
         multiLine: false,
       );
@@ -51,6 +54,7 @@ class _DirectoryScreenState extends State<DirectoryScreen> {
       isLoading = true;
       print("Loading $isLoading");
     });
+  
   }
 
   void _listenForPermissionStatus() async {
@@ -89,19 +93,22 @@ class _DirectoryScreenState extends State<DirectoryScreen> {
                         primary: false,
                         itemCount: imagesPath.length,
                         itemBuilder: (context, index) {
-                          return InkWell(
-                            onTap: (){
-                              Get.to(ViewImageScreen(imageFle: imagesPath[index],));
-                            },
-                            child: Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: Image(
-                                image: FileImage(File(imagesPath[index])),
-                                height: 100,
-                                width: 100,
-                              ),
-                            ),
+                          return ListTile(
+                            title: Text(imagesPath[index].toString()),
                           );
+                          // InkWell(
+                          //   onTap: (){
+                          //     Get.to(ViewImageScreen(imageFle: imagesPath[index],));
+                          //   },
+                          //   child: Padding(
+                          //     padding: const EdgeInsets.all(8.0),
+                          //     child: Image(
+                          //       image: FileImage(File(imagesPath[index])),
+                          //       height: 100,
+                          //       width: 100,
+                          //     ),
+                          //   ),
+                          // );
                         }),
                   ),
                 ],

@@ -40,7 +40,7 @@ class ImageController extends GetxController {
         in systemTempDir.list(recursive: true, followLinks: false)) {
       var pathImage = entity.path;
       RegExp regExp = new RegExp(
-        r"\.(gif|jpe?g|tiff?|png|webp|bmp)",
+        r"\.(mov|avi?g|wmv?|png|mp4|3gp)",
         caseSensitive: false,
         multiLine: false,
       );
